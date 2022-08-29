@@ -1,0 +1,87 @@
+@use './colors.scss' as color;
+
+.window-sample {
+  background-color: color.$black;
+
+  border-radius: 10px;
+
+  position: absolute;
+
+  box-shadow: 0 0 20px 1px #000;
+
+  .title-bar {
+    position: relative;
+
+    user-select: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 40px;
+
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    background-color: rgba(color.$darker-black, 0.95);
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: rgba(color.$white, 0.05);
+
+      cursor: move;
+    }
+
+    .close-button {
+      position: absolute;
+
+      --size: 18px;
+
+      right: var(--size);
+
+      width: var(--size);
+      height: var(--size);
+
+      border-radius: 100%;
+
+      box-shadow: 0 0 20px 5px #000;
+
+      background: color.$red;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    img {
+      left: 10px;
+
+      position: absolute;
+      width: 30px;
+      height: 30px;
+
+      border-radius: 100%;
+
+      box-shadow: 0 0 20px 5px #000;
+    }
+  }
+
+  .content {
+    margin: 16px;
+
+    overflow-y: auto;
+
+    max-height: 330px;
+
+    b {
+      font-weight: 600;
+    }
+
+    * {
+      color: color.$white;
+    }
+  }
+}

@@ -1,0 +1,67 @@
+@use './colors.scss' as color;
+
+.AppList {
+  display: none;
+
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+
+  padding-top: 16px;
+
+  overflow: scroll;
+  overflow-x: hidden;
+
+  height: 500px;
+  width: 300px;
+
+  background: color.$black;
+  box-shadow: 0 0 10px 1px #000;
+
+  border-radius: 0 15px 0 0;
+
+  z-index: 20;
+
+  ul {
+    list-style: none;
+
+    li {
+      user-select: none;
+
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      background-color: color.$black;
+
+      margin: 16px 0;
+      padding: 12px;
+
+      transition: all 0.2s ease-in-out;
+
+      border-radius: 10px;
+
+      img {
+        width: 48px;
+        height: 48px;
+
+        border-radius: 5px;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        background-color: color.$white;
+        color: color.$black;
+        font-weight: 600;
+
+        transform: translateX(24px);
+        box-shadow: 0 0 10px -2px #000;
+      }
+    }
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

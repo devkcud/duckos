@@ -1,0 +1,15 @@
+@use './colors.scss' as color;
+
+.topbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+
+  width: 100%;
+  height: 26px;
+
+  background-color: color.$black;
+  box-shadow: 0 0 10px 1px #000;
+}

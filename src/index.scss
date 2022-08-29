@@ -1,0 +1,50 @@
+@use './styles/colors.scss' as color;
+@import url(https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  color: color.$white;
+  font-family: 'Raleway', sans-serif;
+
+  font-weight: 300;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+
+  background-color: color.$black;
+  backdrop-filter: brightness(150%);
+}
+
+code {
+  color: color.$accent;
+  font-weight: 900;
+}
+
+#NOT_SUPPORTED_WARNING {
+  display: none;
+}
+
+@media only screen and (max-width: 659px) {
+  .App {
+    display: none;
+  }
+
+  #NOT_SUPPORTED_WARNING {
+    display: block;
+  }
+}
+
+@media only screen and (max-height: 767px) {
+  .App {
+    display: none;
+  }
+
+  #NOT_SUPPORTED_WARNING {
+    display: block;
+  }
+}
