@@ -1,0 +1,3 @@
+# DuckOS
+
+Literally my portfolio.
