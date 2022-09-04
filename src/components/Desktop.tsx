@@ -1,8 +1,13 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import '../styles/Desktop.scss';
 import WindowSample from './WindowSample';
 
 function Desktop() {
   return (
-    <div id="desktop" style={{ paddingTop: '30px', height: 'calc(100vh - 26px)' }}>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+    <div id="desktop" style={{ height: 'calc(100vh - 75px)' }}>
+      <div className="bg-image" />
+
       <WindowSample
         id="greeter.app"
         title="Greeter"

@@ -1,0 +1,20 @@
+#desktop {
+  position: relative;
+
+  .bg-image {
+    position: absolute;
+    top: -10px;
+    z-index: -999;
+
+    width: 100%;
+    height: calc(100vh - 16px);
+
+    background-image: url('https://loremflickr.com/1920/1080/background');
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    filter: blur(5px) brightness(75%);
+  }
+}
