@@ -23,7 +23,35 @@ export const taskbarItemList = itemsTaskbar.filter((item) => {
 
 export const onClickEvent = (id: string) => {
   const app = document.getElementById(id);
-  app!.style.display = app!.style.display === 'none' ? 'block' : 'none';
+
+  if (app!.style.display === '') app!.style.display = 'none';
+
+  function setOpacity(opacity: number) {
+    app!.style.opacity = `${opacity / 100}`;
+    app!.style.filter = `alpha(opacity=${opacity})`;
+  }
+
+  function fadeOut(opacity: number) {
+    setOpacity(opacity);
+    if (opacity === 1) {
+      app!.style.display = 'none';
+    }
+  }
+
+  function fadeIn(opacity: number) {
+    setOpacity(opacity);
+    if (opacity === 1) {
+      app!.style.display = 'block';
+    }
+  }
+
+  const speed = 1.25;
+
+  if (app!.style.display === 'none') {
+    for (let i = 1; i <= 100; i += 1) setTimeout(() => fadeIn(0 + i), i * speed);
+  } else if (app!.style.display === 'block') {
+    for (let i = 1; i <= 100; i += 1) setTimeout(() => fadeOut(100 - i), i * speed);
+  }
 };
 
 function Taskbar() {

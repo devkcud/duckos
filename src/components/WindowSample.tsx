@@ -43,8 +43,36 @@ function WindowSample({
 
   const onClickEvent = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const target = e.currentTarget.parentElement?.parentElement;
-    if (target) {
-      target.style.display = 'none';
+
+    const app = document.getElementById(target!.id);
+
+    if (app!.style.display === '') app!.style.display = 'none';
+
+    function setOpacity(opacity: number) {
+      app!.style.opacity = `${opacity / 100}`;
+      app!.style.filter = `alpha(opacity=${opacity})`;
+    }
+
+    function fadeOut(opacity: number) {
+      setOpacity(opacity);
+      if (opacity === 1) {
+        app!.style.display = 'none';
+      }
+    }
+
+    function fadeIn(opacity: number) {
+      setOpacity(opacity);
+      if (opacity === 1) {
+        app!.style.display = 'block';
+      }
+    }
+
+    const speed = 0.65;
+
+    if (app!.style.display === 'none') {
+      for (let i = 1; i <= 100; i += 1) setTimeout(() => fadeIn(0 + i), i * speed);
+    } else if (app!.style.display === 'block') {
+      for (let i = 1; i <= 100; i += 1) setTimeout(() => fadeOut(100 - i), i * speed);
     }
   };
 
