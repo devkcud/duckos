@@ -14,6 +14,8 @@ export interface IWindowSample {
   defaultY?: number;
 
   gotoTaskbar?: boolean;
+
+  onClose?: () => void;
 }
 
 export interface IItemList {

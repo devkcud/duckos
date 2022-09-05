@@ -76,6 +76,22 @@
 
     max-height: 330px;
 
+    textarea {
+      width: 100%;
+      height: 325px;
+
+      background-color: color.$lighter-black;
+      padding: 10px;
+
+      outline: none;
+      border: none;
+      resize: none;
+
+      border-radius: 10px;
+
+      font-size: 24px;
+    }
+
     b {
       font-weight: 600;
     }

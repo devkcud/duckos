@@ -18,6 +18,7 @@ function WindowSample({
   defaultX,
   defaultY,
   gotoTaskbar,
+  onClose,
 }: IWindowSample) {
   const defaultStyle = {
     width: defaultWidth,
@@ -51,9 +52,15 @@ function WindowSample({
         style={hide ? { ...defaultStyle, display: 'none' } : { ...defaultStyle, display: 'block' }}
         className="window-sample"
       >
-        <span className="title-bar">
+        <span className="title-bar" onDoubleClick={() => onClickEvent(id)}>
           {icon && <img src={icon} alt="icon" />}
-          <div className="close-button" onClick={() => onClickEvent(id)} />
+          <div
+            className="close-button"
+            onClick={() => {
+              onClickEvent(id);
+              if (onClose !== undefined) onClose();
+            }}
+          />
           <p>{title}</p>
         </span>
 
@@ -71,6 +78,7 @@ WindowSample.defaultProps = {
   defaultX: 70,
   defaultY: 50,
   gotoTaskbar: false,
+  onclose: () => {},
 };
 
 export default WindowSample;
