@@ -3,7 +3,7 @@
 import { BsWindow } from 'react-icons/bs';
 import '../styles/AppList.scss';
 import { filterItems, onClickEvent } from '../utils/Utils';
-import { itemList } from './Desktop';
+import { appsList } from './Desktop';
 
 export default function AppsList() {
   return (
@@ -11,7 +11,7 @@ export default function AppsList() {
       <h1 style={{ textAlign: 'center' }}>Applications</h1>
 
       <ul className="Apps">
-        {filterItems(itemList).map((item) => (
+        {filterItems(appsList).map((item) => (
           <li onClick={() => onClickEvent(item.windowId)}>
             {(item.icon && <img src={item.icon} alt={item.tooltip} />) || <BsWindow />}
             {item.tooltip} ({item.windowId})

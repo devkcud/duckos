@@ -5,7 +5,7 @@ import { FaBluetooth, FaTh, FaWifi } from 'react-icons/fa';
 import { HiVolumeUp } from 'react-icons/hi';
 import '../styles/Taskbar.scss';
 import { filterItems, onClickEvent } from '../utils/Utils';
-import { itemsTaskbar } from './Desktop';
+import { taskbarAppsList } from './Desktop';
 
 function Taskbar() {
   return (
@@ -13,7 +13,7 @@ function Taskbar() {
       <FaTh className="menu-icon" onClick={() => onClickEvent('applist')} />
       <div className="taskbar-items">
         <ul>
-          {filterItems(itemsTaskbar).map((item) => (
+          {filterItems(taskbarAppsList).map((item) => (
             <li>
               {(item.icon && (
                 <img

@@ -5,7 +5,7 @@ import Draggable from 'react-draggable';
 import '../styles/WindowSample.scss';
 import { IWindowSample } from '../utils/Interfaces';
 import { onClickEvent } from '../utils/Utils';
-import { itemList, itemsTaskbar } from './Desktop';
+import { appsList, taskbarAppsList } from './Desktop';
 
 function WindowSample({
   id,
@@ -25,8 +25,8 @@ function WindowSample({
     height: defaultHeight,
   };
 
-  itemList.push({ windowId: id, tooltip: title, icon });
-  if (gotoTaskbar) itemsTaskbar.push({ windowId: id, tooltip: title, icon });
+  appsList.push({ windowId: id, tooltip: title, icon });
+  if (gotoTaskbar) taskbarAppsList.push({ windowId: id, tooltip: title, icon });
 
   return (
     // @ts-ignore

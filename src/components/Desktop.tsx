@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import '../styles/Desktop.scss';
-import { IItemList } from '../utils/Interfaces';
+import { IAppsList } from '../utils/Interfaces';
 import DuckPad from './apps/DuckPad';
 import Greeter from './apps/Greeter';
 
-export const itemList: IItemList[] = [];
-export const itemsTaskbar: IItemList[] = [];
+export const appsList: IAppsList[] = [];
+export const taskbarAppsList: IAppsList[] = [];
 
 function Desktop() {
   return (
