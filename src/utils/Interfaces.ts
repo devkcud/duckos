@@ -18,7 +18,7 @@ export interface IWindowSample {
   onClose?: () => void;
 }
 
-export interface IItemList {
+export interface IAppsList {
   icon?: string;
   tooltip: string;
   windowId: string;
