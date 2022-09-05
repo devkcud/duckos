@@ -4,11 +4,8 @@ import { BsWindow } from 'react-icons/bs';
 import { FaBluetooth, FaTh, FaWifi } from 'react-icons/fa';
 import { HiVolumeUp } from 'react-icons/hi';
 import '../styles/Taskbar.scss';
-import { IItemList } from '../utils/Interfaces';
 import { filterItems, onClickEvent } from '../utils/Utils';
-
-export const itemList: IItemList[] = [];
-export const itemsTaskbar: IItemList[] = [];
+import { itemsTaskbar } from './Desktop';
 
 function Taskbar() {
   return (

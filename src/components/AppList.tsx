@@ -3,7 +3,7 @@
 import { BsWindow } from 'react-icons/bs';
 import '../styles/AppList.scss';
 import { filterItems, onClickEvent } from '../utils/Utils';
-import { itemList } from './Taskbar';
+import { itemList } from './Desktop';
 
 export default function AppsList() {
   return (

@@ -5,7 +5,7 @@ import Draggable from 'react-draggable';
 import '../styles/WindowSample.scss';
 import { IWindowSample } from '../utils/Interfaces';
 import { onClickEvent } from '../utils/Utils';
-import { itemList, itemsTaskbar } from './Taskbar';
+import { itemList, itemsTaskbar } from './Desktop';
 
 function WindowSample({
   id,
