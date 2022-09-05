@@ -105,4 +105,18 @@
       }
     }
   }
+
+  .dock-icons {
+    position: absolute;
+    right: 32px;
+
+    display: flex;
+    gap: 16px;
+
+    list-style: none;
+
+    svg {
+      transform: scale(1.5);
+    }
+  }
 }
