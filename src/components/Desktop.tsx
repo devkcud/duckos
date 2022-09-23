@@ -3,6 +3,7 @@ import '../styles/Desktop.scss';
 import { IAppsList } from '../utils/Interfaces';
 import DuckPad from './apps/DuckPad';
 import Greeter from './apps/Greeter';
+import Terminal from './apps/Terminal';
 
 export const appsList: IAppsList[] = [];
 export const taskbarAppsList: IAppsList[] = [];
@@ -15,6 +16,7 @@ function Desktop() {
 
       <Greeter />
       <DuckPad />
+      <Terminal />
     </div>
   );
 }

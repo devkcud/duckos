@@ -1,0 +1,54 @@
+@use './colors.scss' as color;
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  background-color: color.$accent;
+  border-radius: 100px;
+}
+
+#terminal-screen {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+
+  height: 300px;
+  width: 100%;
+
+  background-color: color.$darker-black;
+
+  border-radius: 10px 10px 0 0;
+
+  overflow-y: scroll;
+
+  li {
+    margin-inline: 10px;
+    margin-block: 10px;
+  }
+}
+
+#command-input {
+  display: flex;
+
+  span {
+    border-bottom-left-radius: 10px;
+  }
+
+  input[type='text'] {
+    border-bottom-right-radius: 10px;
+    width: calc(100% - 134px);
+  }
+
+  * {
+    background-color: color.$darker-black;
+
+    outline: none;
+    border: none;
+
+    padding: 5px;
+  }
+}
