@@ -1,12 +1,35 @@
 import WindowSample from '../WindowSample';
 
 import '../../styles/Terminal.scss';
-import { onClickEvent } from '../../utils/Utils';
+import { fadeIn, fadeOut, onClickEvent } from '../../utils/Utils';
 
 let lastCommand: string = '';
 
 export default function Terminal() {
   const id: string = 'terminal.dk';
+
+  const commands = [
+    {
+      name: 'help',
+      about: 'Shows up this menu;',
+    },
+    {
+      name: 'echo [args]',
+      about: 'Prints a text in the terminal;',
+    },
+    {
+      name: 'clear',
+      about: 'Clears the screen;',
+    },
+    {
+      name: 'about',
+      about: 'Shows up who created this website;',
+    },
+    {
+      name: 'exit',
+      about: 'Exit.',
+    },
+  ];
 
   return (
     <WindowSample
@@ -43,6 +66,19 @@ export default function Terminal() {
                   li.appendChild(breakLine);
                   li.appendChild(result);
                   scn.appendChild(li);
+
+                  li.style.display = 'none';
+
+                  if (li.style.display === '') li.style.display = 'none';
+
+                  const speed = 1.25;
+
+                  if (li.style.display === 'none')
+                    for (let i = 1; i <= 100; i += 1)
+                      setTimeout(
+                        () => fadeIn(li, 0 + i, () => span.scrollIntoView({ behavior: 'smooth' })),
+                        i * speed,
+                      );
                 }
 
                 if (e.key === 'ArrowUp') {
@@ -66,7 +102,7 @@ export default function Terminal() {
                 // @ts-ignore
                 lastCommand = input.value;
 
-                switch (cmd) {
+                switch (cmd.toLowerCase()) {
                   case 'echo': {
                     if (args.length === 0) break;
 
@@ -76,24 +112,42 @@ export default function Terminal() {
                   }
 
                   case 'clear': {
-                    Array.from(scn.getElementsByTagName('li')).forEach((element: any) =>
-                      scn.removeChild(element),
-                    );
+                    Array.from(scn.getElementsByTagName('li')).forEach((element: any) => {
+                      const speed = 1.25;
+
+                      if (element.style.display !== 'none')
+                        for (let i = 1; i <= 100; i += 1)
+                          setTimeout(
+                            () => fadeOut(element, 100 - i, () => scn.removeChild(element)),
+                            i * speed,
+                          );
+                    });
                     break;
                   }
 
                   case 'help': {
+                    let helpTxt = '';
+
+                    commands.forEach((c) => {
+                      helpTxt += `<b>${c.name}</b><br />- ${c.about}<br /><br />`;
+                    });
+
                     const txt = `
 <h1 style="text-align: center;">Help menu</h1>
 <br />
-<b>help</b><br />
-- Shows up this menu;<br /><br />
-<b>echo [args]</b><br />
-- Will return a string with the given args;<br /><br />
-<b>clear</b><br />
-- Clears the screen;
+${helpTxt}
 `;
                     log(cmd, [], txt, true);
+                    break;
+                  }
+
+                  case 'about': {
+                    log(
+                      cmd,
+                      [],
+                      'André Luis (devkcud) is a brazilian front-end & back-end developer. Enjoys writing in JavaScript/NodeJS, TypeScript, Python & Java.',
+                      false,
+                    );
                     break;
                   }
 
@@ -112,10 +166,6 @@ export default function Terminal() {
 
                 // @ts-ignore
                 input.value = '';
-
-                Array.from(document.getElementsByClassName('command-run-item'))
-                  .at(-1)
-                  ?.scrollIntoView();
               }}
             />
           </div>

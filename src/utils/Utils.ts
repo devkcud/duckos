@@ -14,17 +14,19 @@ export function setOpacity(app: HTMLElement, opacity: number) {
   app!.style.filter = `alpha(opacity=${opacity})`;
 }
 
-export function fadeOut(app: HTMLElement, opacity: number) {
+export function fadeOut(app: HTMLElement, opacity: number, out?: () => void) {
   setOpacity(app, opacity);
   if (opacity === 1) {
     app!.style.display = 'none';
+    if (out) out();
   }
 }
 
-export function fadeIn(app: HTMLElement, opacity: number) {
+export function fadeIn(app: HTMLElement, opacity: number, out?: () => void) {
   setOpacity(app, opacity);
   if (opacity === 1) {
     app!.style.display = 'block';
+    if (out) out();
   }
 }
 
