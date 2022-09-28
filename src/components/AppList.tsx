@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { BsWindow } from 'react-icons/bs';
 import '../styles/AppList.scss';
-import { filterItems, onClickEvent } from '../utils/Utils';
+import { fadeEvent, filterItems } from '../utils/Utils';
 import { appsList } from './Desktop';
 
 export default function AppsList() {
@@ -12,7 +12,7 @@ export default function AppsList() {
 
       <ul className="Apps">
         {filterItems(appsList).map((item) => (
-          <li onClick={() => onClickEvent(item.windowId)}>
+          <li onClick={() => fadeEvent(item.windowId)}>
             {(item.icon && <img src={item.icon} alt={item.tooltip} />) || <BsWindow />}
             {item.tooltip} ({item.windowId})
           </li>

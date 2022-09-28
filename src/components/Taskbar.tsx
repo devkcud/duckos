@@ -4,24 +4,25 @@ import { BsWindow } from 'react-icons/bs';
 import { FaBluetooth, FaTh, FaWifi } from 'react-icons/fa';
 import { HiVolumeUp } from 'react-icons/hi';
 import '../styles/Taskbar.scss';
-import { filterItems, onClickEvent } from '../utils/Utils';
+import { IAppsList } from '../utils/Interfaces';
+import { fadeEvent, filterItems } from '../utils/Utils';
 import { taskbarAppsList } from './Desktop';
 
 function Taskbar() {
   return (
     <div className="taskbar">
-      <FaTh className="menu-icon" onClick={() => onClickEvent('applist')} />
+      <FaTh className="menu-icon" onClick={() => fadeEvent(document.getElementById('applist')!)} />
       <div className="taskbar-items">
         <ul>
-          {filterItems(taskbarAppsList).map((item) => (
+          {filterItems(taskbarAppsList).map((item: IAppsList) => (
             <li>
               {(item.icon && (
                 <img
                   src={item.icon}
                   alt={item.tooltip}
-                  onClick={() => onClickEvent(item.windowId)}
+                  onClick={() => fadeEvent(document.getElementById(item.windowId)!)}
                 />
-              )) || <BsWindow onClick={() => onClickEvent(item.windowId)} />}
+              )) || <BsWindow onClick={() => fadeEvent(document.getElementById(item.windowId)!)} />}
               <span className="tooltip">
                 {item.tooltip} ({item.windowId})
               </span>

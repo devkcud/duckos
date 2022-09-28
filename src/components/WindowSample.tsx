@@ -4,7 +4,7 @@
 import Draggable from 'react-draggable';
 import '../styles/WindowSample.scss';
 import { IWindowSample } from '../utils/Interfaces';
-import { onClickEvent } from '../utils/Utils';
+import { fadeEvent } from '../utils/Utils';
 import { appsList, taskbarAppsList } from './Desktop';
 
 function WindowSample({
@@ -52,12 +52,12 @@ function WindowSample({
         style={hide ? { ...defaultStyle, display: 'none' } : { ...defaultStyle, display: 'block' }}
         className="window-sample"
       >
-        <span className="title-bar" onDoubleClick={() => onClickEvent(id)}>
+        <span className="title-bar" onDoubleClick={() => fadeEvent(document.getElementById(id)!)}>
           {icon && <img src={icon} alt="icon" />}
           <div
             className="close-button"
             onClick={() => {
-              onClickEvent(id);
+              fadeEvent(document.getElementById(id)!);
               if (onClose !== undefined) onClose();
             }}
           />

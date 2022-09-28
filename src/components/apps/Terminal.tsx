@@ -1,39 +1,74 @@
 import WindowSample from '../WindowSample';
 
 import '../../styles/Terminal.scss';
-import { fadeIn, fadeOut, onClickEvent } from '../../utils/Utils';
+import { fadeEvent, fadeIn } from '../../utils/Utils';
 
 let lastCommand: string = '';
 
 export default function Terminal() {
-  const id: string = 'terminal.dk';
+  function log(cmd: string, args: string[], text: string, useInnerHTML: boolean) {
+    const section = document.createElement('li');
+    const command = document.createElement('span');
+    const result = document.createElement('span');
 
-  const commands = [
-    {
+    section.style.display = 'none';
+
+    command.textContent = `user@duckos ~ $ ${cmd} ${args.join(' ')}`;
+    !useInnerHTML ? (result.textContent = text) : (result.innerHTML = text);
+
+    command.classList.add('command-run-item');
+
+    section.appendChild(command);
+    section.appendChild(document.createElement('br'));
+    section.appendChild(result);
+
+    document.getElementById('terminal-screen')?.appendChild(section);
+
+    for (let i = 1; i <= 100; i += 1)
+      setTimeout(() => fadeIn(section, 0 + i, () => command.scrollIntoView()), i * 1.1);
+    fadeEvent(section, 1.1);
+  }
+
+  const PROGRAM_ID: string = 'terminal.dk';
+
+  const commandList: any = {
+    help: {
       name: 'help',
+      args: [],
       about: 'Shows up this menu;',
     },
-    {
-      name: 'echo [args]',
+    echo: {
+      name: 'echo',
+      args: ['...*text'],
       about: 'Prints a text in the terminal;',
     },
-    {
+    clear: {
       name: 'clear',
+      args: [],
       about: 'Clears the screen;',
     },
-    {
-      name: 'about',
+    creator: {
+      name: 'creator',
+      args: [],
       about: 'Shows up who created this website;',
     },
-    {
+    exit: {
       name: 'exit',
+      args: [],
       about: 'Exit.',
     },
-  ];
+  };
+
+  const helpText = Object.keys(commandList)
+    .map((value: string) => {
+      const cmd = commandList[value];
+      return `<b>${cmd.name}</b> ${cmd.args}<br />--> ${cmd.about}<br /><br />`;
+    })
+    .join('');
 
   return (
     <WindowSample
-      id={id}
+      id={PROGRAM_ID}
       title="Terminal"
       icon="https://loremflickr.com/1920/1080/computer"
       gotoTaskbar
@@ -47,125 +82,52 @@ export default function Terminal() {
               id="terminal-input"
               placeholder="help"
               onKeyDown={(e) => {
-                const scn: HTMLElement = document.getElementById('terminal-screen')!;
-                const input: HTMLElement = document.getElementById('terminal-input')!;
-
-                function log(cmd: string, args: string[], text: string, useInnerHTML: boolean) {
-                  const li = document.createElement('li');
-                  const span = document.createElement('span');
-                  const breakLine = document.createElement('br');
-                  const result = document.createElement('span');
-
-                  span.textContent = `user@duckos ~ $ ${cmd} ${args.join(' ')}`;
-                  if (!useInnerHTML) result.textContent = text;
-                  else result.innerHTML = text;
-
-                  span.classList.add('command-run-item');
-
-                  li.appendChild(span);
-                  li.appendChild(breakLine);
-                  li.appendChild(result);
-                  scn.appendChild(li);
-
-                  li.style.display = 'none';
-
-                  if (li.style.display === '') li.style.display = 'none';
-
-                  const speed = 1.25;
-
-                  if (li.style.display === 'none')
-                    for (let i = 1; i <= 100; i += 1)
-                      setTimeout(
-                        () => fadeIn(li, 0 + i, () => span.scrollIntoView({ behavior: 'smooth' })),
-                        i * speed,
-                      );
-                }
-
-                if (e.key === 'ArrowUp') {
-                  // @ts-ignore
-                  input.value = lastCommand;
-                  return;
-                }
+                const terminalScreen: HTMLElement = document.getElementById('terminal-screen')!;
+                const terminalInput: HTMLElement = document.getElementById('terminal-input')!;
 
                 // @ts-ignore
-                if (e.key !== 'Enter') return;
+                const terminalInputValue: string = terminalInput.value.trim();
 
                 // @ts-ignore
-                if (input.value.trim() === '') return;
+                e.key === 'ArrowUp' && (terminalInput.value = lastCommand);
+                if (e.key !== 'Enter' || terminalInputValue === '') return;
 
-                // @ts-ignore
-                const cmd = input.value.split(' ')[0];
-                // @ts-ignore
-                const args = input.value.split(' ');
-                args.shift();
+                const commandName = terminalInputValue.split(' ')[0];
+                const commandArgs = terminalInputValue.split(' ');
+                commandArgs.shift();
 
-                // @ts-ignore
-                lastCommand = input.value;
+                lastCommand = terminalInputValue;
 
-                switch (cmd.toLowerCase()) {
-                  case 'echo': {
-                    if (args.length === 0) break;
-
-                    log(cmd, args, args.join(' '), false);
-
+                // Running commands
+                switch (commandName.toLowerCase()) {
+                  case commandList.echo.name:
+                    log(commandName, commandArgs, commandArgs.join(' ') || '', false);
                     break;
-                  }
 
-                  case 'clear': {
-                    Array.from(scn.getElementsByTagName('li')).forEach((element: any) => {
-                      const speed = 1.25;
-
-                      if (element.style.display !== 'none')
-                        for (let i = 1; i <= 100; i += 1)
-                          setTimeout(
-                            () => fadeOut(element, 100 - i, () => scn.removeChild(element)),
-                            i * speed,
-                          );
-                    });
+                  case commandList.clear.name:
+                    terminalScreen.innerHTML = '';
                     break;
-                  }
 
-                  case 'help': {
-                    let helpTxt = '';
-
-                    commands.forEach((c) => {
-                      helpTxt += `<b>${c.name}</b><br />- ${c.about}<br /><br />`;
-                    });
-
-                    const txt = `
-<h1 style="text-align: center;">Help menu</h1>
-<br />
-${helpTxt}
-`;
-                    log(cmd, [], txt, true);
+                  case commandList.help.name:
+                    log(commandName, [], `<h1>Help</h1><br />${helpText}`, true);
                     break;
-                  }
 
-                  case 'about': {
-                    log(
-                      cmd,
-                      [],
-                      'André Luis (devkcud) is a brazilian front-end & back-end developer. Enjoys writing in JavaScript/NodeJS, TypeScript, Python & Java.',
-                      false,
-                    );
+                  case commandList.creator.name:
+                    log(commandName, [], 'Andrew is a front/back-end developer.', false);
                     break;
-                  }
 
-                  case 'exit': {
-                    Array.from(scn.getElementsByTagName('li')).forEach((element: any) =>
-                      scn.removeChild(element),
-                    );
-                    onClickEvent(id);
+                  case commandList.exit.name:
+                    terminalScreen.innerHTML = '';
+                    fadeEvent(document.getElementById(PROGRAM_ID)!);
                     break;
-                  }
 
                   default:
-                    log(cmd, args, `${cmd} isn't a valid command.`, false);
+                    log(commandName, commandArgs, `${commandName} isn't a valid command.`, false);
                     break;
                 }
 
                 // @ts-ignore
-                input.value = '';
+                terminalInput.value = ''; // Remove command from the input
               }}
             />
           </div>

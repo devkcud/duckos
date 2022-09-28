@@ -35,12 +35,13 @@
   display: flex;
 
   span {
+    width: 135px;
     border-bottom-left-radius: 10px;
   }
 
   input[type='text'] {
     border-bottom-right-radius: 10px;
-    width: calc(100% - 134px);
+    width: calc(100% - 135px);
   }
 
   * {

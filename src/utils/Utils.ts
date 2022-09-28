@@ -9,37 +9,32 @@ export function filterItems(list: any[]) {
   });
 }
 
-export function setOpacity(app: HTMLElement, opacity: number) {
-  app!.style.opacity = `${opacity / 100}`;
-  app!.style.filter = `alpha(opacity=${opacity})`;
+export function setOpacity(element: HTMLElement, opacity: number) {
+  element!.style.opacity = `${opacity / 100}`;
+  element!.style.filter = `alpha(opacity=${opacity})`;
 }
 
-export function fadeOut(app: HTMLElement, opacity: number, out?: () => void) {
-  setOpacity(app, opacity);
+export function fadeOut(element: HTMLElement, opacity: number, out?: () => void) {
+  setOpacity(element, opacity);
   if (opacity === 1) {
-    app!.style.display = 'none';
+    element!.style.display = 'none';
     if (out) out();
   }
 }
 
-export function fadeIn(app: HTMLElement, opacity: number, out?: () => void) {
-  setOpacity(app, opacity);
+export function fadeIn(element: HTMLElement, opacity: number, out?: () => void) {
+  setOpacity(element, opacity);
   if (opacity === 1) {
-    app!.style.display = 'block';
+    element!.style.display = 'block';
     if (out) out();
   }
 }
 
-export const onClickEvent = (id: string) => {
-  const app = document.getElementById(id);
+export function fadeEvent(element: HTMLElement, speed: number = 1.25) {
+  element!.style.display === '' && (element!.style.display = 'none');
 
-  if (app!.style.display === '') app!.style.display = 'none';
-
-  const speed = 1.25;
-
-  if (app!.style.display === 'none') {
-    for (let i = 1; i <= 100; i += 1) setTimeout(() => fadeIn(app!, 0 + i), i * speed);
-  } else if (app!.style.display === 'block') {
-    for (let i = 1; i <= 100; i += 1) setTimeout(() => fadeOut(app!, 100 - i), i * speed);
-  }
-};
+  for (let i = 1; i <= 100; i += 1)
+    element!.style.display === 'none'
+      ? setTimeout(() => fadeIn(element!, 0 + i), i * speed)
+      : setTimeout(() => fadeOut(element!, 100 - i), i * speed);
+}
