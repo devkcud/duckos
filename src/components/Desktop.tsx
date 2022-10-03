@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import '../styles/Desktop.scss';
 import { IAppsList } from '../utils/Interfaces';
+import Configurator from './apps/Configurator';
 import DuckPad from './apps/DuckPad';
 import Greeter from './apps/Greeter';
 import Terminal from './apps/Terminal';
@@ -17,6 +18,7 @@ function Desktop() {
       <Greeter />
       <DuckPad />
       <Terminal />
+      <Configurator />
     </div>
   );
 }
