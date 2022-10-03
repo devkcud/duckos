@@ -1,7 +1,8 @@
 import WindowSample from '../WindowSample';
 
 import '../../styles/Terminal.scss';
-import { fadeEvent, fadeIn } from '../../utils/Utils';
+import { fadeEvent, fadeIn, filterItems } from '../../utils/Utils';
+import { appsList } from '../Desktop';
 
 let lastCommand: string = '';
 
@@ -47,6 +48,16 @@ export default function Terminal() {
       args: [],
       about: 'Clears the screen;',
     },
+    list: {
+      name: 'list',
+      args: [],
+      about: 'Lists every app.',
+    },
+    execute: {
+      name: 'execute',
+      args: ['program'],
+      about: 'Forces an app to show up.',
+    },
     creator: {
       name: 'creator',
       args: [],
@@ -82,6 +93,8 @@ export default function Terminal() {
               id="terminal-input"
               placeholder="help"
               onKeyDown={(e) => {
+                const allApps = filterItems(appsList).map((app) => app.windowId);
+
                 const terminalScreen: HTMLElement = document.getElementById('terminal-screen')!;
                 const terminalInput: HTMLElement = document.getElementById('terminal-input')!;
 
@@ -111,6 +124,21 @@ export default function Terminal() {
                   case commandList.help.name:
                     log(commandName, [], `<h1>Help</h1><br />${helpText}`, true);
                     break;
+
+                  case commandList.list.name:
+                    log(commandName, [], allApps.join('<br />'), true);
+                    break;
+
+                  case commandList.execute.name: {
+                    const app = commandArgs[0];
+
+                    if (!app) break;
+                    if (!allApps.includes(app)) break;
+
+                    log(commandName, commandArgs, '', false);
+                    fadeEvent(document.getElementById(app)!);
+                    break;
+                  }
 
                   case commandList.creator.name:
                     log(commandName, [], 'Andrew is a front/back-end developer.', false);
