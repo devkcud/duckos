@@ -1,5 +1,7 @@
+import { appsList } from '../components/Desktop';
+import { IAppsList } from './Interfaces';
 /* eslint-disable no-param-reassign */
-export function filterItems(list: any[]) {
+export function filterItems(list: IAppsList[]): IAppsList[] {
   const seenItems = new Set();
 
   return list.filter((el) => {
@@ -9,12 +11,21 @@ export function filterItems(list: any[]) {
   });
 }
 
-export function setOpacity(element: HTMLElement, opacity: number) {
+export function popOut(element: HTMLElement): void {
+  filterItems(appsList).map(
+    // eslint-disable-next-line no-return-assign
+    (el: IAppsList) => (document.getElementById(el.windowId)!.style.zIndex = '1'),
+  );
+
+  element.style.zIndex = '10';
+}
+
+export function setOpacity(element: HTMLElement, opacity: number): void {
   element!.style.opacity = `${opacity / 100}`;
   element!.style.filter = `alpha(opacity=${opacity})`;
 }
 
-export function fadeOut(element: HTMLElement, opacity: number, out?: () => void) {
+export function fadeOut(element: HTMLElement, opacity: number, out?: () => void): void {
   setOpacity(element, opacity);
   if (opacity === 1) {
     element!.style.display = 'none';
@@ -22,15 +33,16 @@ export function fadeOut(element: HTMLElement, opacity: number, out?: () => void)
   }
 }
 
-export function fadeIn(element: HTMLElement, opacity: number, out?: () => void) {
+export function fadeIn(element: HTMLElement, opacity: number, out?: () => void): void {
   setOpacity(element, opacity);
   if (opacity === 1) {
     element!.style.display = 'block';
+    popOut(element);
     if (out) out();
   }
 }
 
-export function fadeEvent(element: HTMLElement, speed: number = 1.25) {
+export function fadeEvent(element: HTMLElement, speed: number = 1.25): void {
   element!.style.display === '' && (element!.style.display = 'none');
 
   for (let i = 1; i <= 100; i += 1)

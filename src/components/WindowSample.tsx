@@ -4,7 +4,7 @@
 import Draggable from 'react-draggable';
 import '../styles/WindowSample.scss';
 import { IWindowSample } from '../utils/Interfaces';
-import { fadeEvent } from '../utils/Utils';
+import { fadeEvent, popOut } from '../utils/Utils';
 import { appsList, taskbarAppsList } from './Desktop';
 
 function WindowSample({
@@ -32,19 +32,13 @@ function WindowSample({
     // @ts-ignore
     <Draggable
       defaultPosition={{ x: defaultX, y: defaultY }}
-      handle="span"
+      handle=".title-bar"
       bounds="#desktop"
       onStart={(e) => {
         e.preventDefault();
 
-        Array.from(document.getElementsByClassName('window-sample')).forEach(
-          // @ts-ignore
-          // eslint-disable-next-line no-return-assign
-          (element) => element !== e.currentTarget && (element.style.zIndex = '1'),
-        );
-
-        // @ts-ignore
-        if (e.target) e.target.parentElement.style.zIndex = '10';
+        const element = e.target as HTMLElement;
+        popOut(element.parentElement!);
       }}
     >
       <div
@@ -64,7 +58,17 @@ function WindowSample({
           <p>{title}</p>
         </span>
 
-        <div className="content">{body}</div>
+        <div
+          className="content"
+          onClick={(e) => {
+            e.preventDefault();
+
+            const element = e.target as HTMLElement;
+            popOut(element.parentElement!.parentElement!);
+          }}
+        >
+          {body}
+        </div>
       </div>
     </Draggable>
   );

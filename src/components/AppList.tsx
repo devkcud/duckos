@@ -12,7 +12,7 @@ export default function AppsList() {
 
       <ul className="Apps">
         {filterItems(appsList).map((item) => (
-          <li onClick={() => fadeEvent(item.windowId)}>
+          <li onClick={() => fadeEvent(document.getElementById(item.windowId)!)}>
             {(item.icon && <img src={item.icon} alt={item.tooltip} />) || <BsWindow />}
             {item.tooltip} ({item.windowId})
           </li>
