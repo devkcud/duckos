@@ -34,12 +34,7 @@ function WindowSample({
       defaultPosition={{ x: defaultX, y: defaultY }}
       handle=".title-bar"
       bounds="#desktop"
-      onStart={(e) => {
-        e.preventDefault();
-
-        const element = e.target as HTMLElement;
-        popOut(element.parentElement!);
-      }}
+      onStart={() => popOut(document.getElementById(id)!)}
     >
       <div
         id={id}
@@ -58,15 +53,7 @@ function WindowSample({
           <p>{title}</p>
         </span>
 
-        <div
-          className="content"
-          onClick={(e) => {
-            e.preventDefault();
-
-            const element = e.target as HTMLElement;
-            popOut(element.parentElement!.parentElement!);
-          }}
-        >
+        <div className="content" onClick={() => popOut(document.getElementById(id)!)}>
           {body}
         </div>
       </div>
