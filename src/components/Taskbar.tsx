@@ -40,6 +40,10 @@ function Taskbar() {
         <li>
           <FaWifi />
         </li>
+        <li onClick={() => fadeEvent(document.getElementById('calendar.dk')!)}>
+          <p>Tue, Oct 4</p>
+          <p>0:00 AM</p>
+        </li>
       </ul>
     </div>
   );

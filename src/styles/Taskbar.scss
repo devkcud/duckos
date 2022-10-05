@@ -111,12 +111,24 @@
     right: 32px;
 
     display: flex;
+    align-items: center;
     gap: 16px;
 
     list-style: none;
 
     svg {
       transform: scale(1.5);
+    }
+
+    li {
+      padding: 6px;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: color.$lighter-black;
+
+        cursor: pointer;
+      }
     }
   }
 }
