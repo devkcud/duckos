@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "react": "^18.0.0",
+    "react-calendar": "^3.9.0",
     "react-dom": "^18.0.0",
     "react-draggable": "^4.4.5",
     "react-icons": "^4.4.0",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.0.0",
+    "@types/react-calendar": "^3.5.3",
     "@types/react-dom": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.30.4",
     "@typescript-eslint/parser": "^5.30.4",

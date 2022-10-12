@@ -9,6 +9,10 @@ import { fadeEvent, filterItems } from '../utils/Utils';
 import { taskbarAppsList } from './Desktop';
 
 function Taskbar() {
+  const date = new Date().toUTCString().split(' ');
+  date.pop();
+  date.pop();
+
   return (
     <div className="taskbar">
       <FaTh className="menu-icon" onClick={() => fadeEvent(document.getElementById('applist')!)} />
@@ -41,8 +45,7 @@ function Taskbar() {
           <FaWifi />
         </li>
         <li onClick={() => fadeEvent(document.getElementById('calendar.dk')!)}>
-          <p>Tue, Oct 4</p>
-          <p>0:00 AM</p>
+          <p>{date.join(' ')}</p>
         </li>
       </ul>
     </div>
