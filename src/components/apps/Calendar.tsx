@@ -10,6 +10,7 @@ export default function Calendar() {
     <WindowSample
       id="calendar.dk"
       title="Calendar"
+      icon="https://loremflickr.com/320/240"
       hide
       defaultX={window.innerWidth - 600}
       defaultY={window.innerHeight - 475}
