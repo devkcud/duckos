@@ -1,4 +1,5 @@
 import AppsList from './components/AppList';
+import ClockApp from './components/apps/Clock';
 import Desktop from './components/Desktop';
 import Taskbar from './components/Taskbar';
 import Topbar from './components/Topbar';
@@ -10,6 +11,7 @@ function App() {
       <Desktop />
       <AppsList />
       <Taskbar />
+      <ClockApp />
     </div>
   );
 }

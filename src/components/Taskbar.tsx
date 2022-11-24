@@ -19,7 +19,7 @@ function Taskbar() {
       <div className="taskbar-items">
         <ul>
           {filterItems(taskbarAppsList).map((item: IAppsList) => (
-            <li>
+            <li key={item.windowId}>
               {(item.icon && (
                 <img
                   src={item.icon}

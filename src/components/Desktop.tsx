@@ -2,6 +2,7 @@
 import '../styles/Desktop.scss';
 import { IAppsList } from '../utils/Interfaces';
 import Calendar from './apps/Calendar';
+import Clock from './apps/Clock';
 import Configurator from './apps/Configurator';
 import DuckPad from './apps/DuckPad';
 import Greeter from './apps/Greeter';
@@ -21,6 +22,7 @@ function Desktop() {
       <Terminal />
       <Configurator />
       <Calendar />
+      <Clock />
     </div>
   );
 }
