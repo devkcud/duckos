@@ -32,7 +32,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.7.1",
     "typescript": "^4.6.3",
-    "vite": "^2.9.9"
+    "vite": "^2.9.16"
   },
   "license": "MIT"
 }
